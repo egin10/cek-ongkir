@@ -1,6 +1,7 @@
 const express = require("express"),
   cfg = require("../config/api");
   request = require("request"),
+  axios = require('axios'),
   http = require("http"),
   qs = require("querystring"),
   router = express.Router();
@@ -65,43 +66,27 @@ router.get("/city/:province_id", (req, res) => {
   });
 });
 
+
 //GET COST
-router.post("/cost", (req, res) => {
-  let post_data = qs.stringify({
+router.post('/cost', (req, res) => {
+  let dataParse = qs.stringify({
     origin: req.body.origin,
     destination: req.body.destination,
     weight: req.body.weight,
     courier: req.body.courier
   });
 
-  let post_options = {
-    method: "POST",
-    hostname: "api.rajaongkir.com",
-    port: null,
-    path: "/starter/cost",
+  let options = {
     headers: {
       key: cfg.key,
       "content-type": "application/x-www-form-urlencoded"
     }
-  };
+  }
 
-  let post_req = http.request(post_options, function(response) {
-    var chunks = [];
-
-    response.on("data", function(chunk) {
-      chunks.push(chunk);
-    });
-
-    response.on("end", function() {
-      var body = Buffer.concat(chunks);
-      let data = JSON.parse(body);
-      //   console.log(data);
-      res.send(data);
-    });
+  axios.post(cfg.urlPostCost, dataParse, options).then((response) => {
+    // console.log(response.data);
+    res.json(response.data);
   });
-
-  post_req.write(post_data);
-  post_req.end();
 });
 
 module.exports = router;
