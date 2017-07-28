@@ -80,8 +80,9 @@ app.post("/cost", (req, res) => {
 
     response.on("end", function() {
       var body = Buffer.concat(chunks);
-      let data = body.toString();
-      console.log(data);
+      let data = JSON.parse(body);
+      //   console.log(data);
+      res.send(data);
     });
   });
 
