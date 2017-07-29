@@ -12,22 +12,22 @@ router.get("/", (req, res) => {
 });
 
 //GET PROVINCE
-router.get("/province", (req, res) => {
-  let options = {
-    url: cfg.urlGetProvince,
-    headers: {
-      key: cfg.key
-    }
-  };
-  request(options, (err, response, results) => {
-    if (err) return err;
+// router.get("/province", (req, res) => {
+//   let options = {
+//     url: cfg.urlGetProvince,
+//     headers: {
+//       key: cfg.key
+//     }
+//   };
+//   request(options, (err, response, results) => {
+//     if (err) return err;
 
-    if (!err && response.statusCode == 200) {
-      let data = JSON.parse(results);
-      res.json(data.rajaongkir.results);
-    }
-  });
-});
+//     if (!err && response.statusCode == 200) {
+//       let data = JSON.parse(results);
+//       res.json(data.rajaongkir.results);
+//     }
+//   });
+// });
 
 //GET CITY 
 router.get("/city", (req, res) => {
@@ -48,23 +48,23 @@ router.get("/city", (req, res) => {
 });
 
 //GET CITY BY PROVINCE_ID
-router.get("/city/:province_id", (req, res) => {
-  let url = cfg.urlGetCity + "?province=" + req.params.province_id;
-  let options = {
-    url: url,
-    headers: {
-      key: cfg.key
-    }
-  };
-  request(options, (err, response, results) => {
-    if (err) return err;
+// router.get("/city/:province_id", (req, res) => {
+//   let url = cfg.urlGetCity + "?province=" + req.params.province_id;
+//   let options = {
+//     url: url,
+//     headers: {
+//       key: cfg.key
+//     }
+//   };
+//   request(options, (err, response, results) => {
+//     if (err) return err;
 
-    if (!err && response.statusCode == 200) {
-      let data = JSON.parse(results);
-      res.json(data.rajaongkir.results);
-    }
-  });
-});
+//     if (!err && response.statusCode == 200) {
+//       let data = JSON.parse(results);
+//       res.json(data.rajaongkir.results);
+//     }
+//   });
+// });
 
 
 //GET COST
@@ -85,8 +85,12 @@ router.post('/cost', (req, res) => {
 
   axios.post(cfg.urlPostCost, dataParse, options).then((response) => {
     // console.log(response.data);
-    let data = response.data.rajaongkir.results;
-    res.json(data);
+    let data = response.data.rajaongkir.results[0].costs;
+    if(data.length > 0){
+      res.json(data);
+    }else{
+      res.json({msg: 'Kosong'});
+    }
   });
 });
 
