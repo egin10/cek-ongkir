@@ -1,0 +1,40 @@
+<div class="jumbotron">
+    <h1>Check Ongkos Kirim</h1>
+    <p class="lead">Silahkan Check Ongkos Pengiriman Barang oleh beberapa Kurir yang tersedia.</p>
+</div>
+
+<div class="row marketing">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <label for="KotaAsal">Kota Asal</label>
+            <select class="form-control" id="kota-asal" ></select>
+            <hr>
+            <label for="KotaTujuan">Kota Tujuan</label>
+            <select class="form-control" id="kota-tujuan" ></select>
+            <hr>
+            <label for="Berat">Berat</label>
+            <input type="text" class="form-control" id="berat">
+            <hr>
+            <label for="Kurir">Kurir</label>
+            <select id="kurir" class="form-control">
+                <option value="jne">JNE</option>
+                <option value="pos">POS</option>
+                <option value="tiki">TIKI</option>
+            </select>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-lg-4 col-lg-offset-5">
+            <button type="submit" class="btn btn-success" id="submit">Check</button>
+        </div>
+    </div>
+</div>
+
+<div id="result"></div>
+
+<footer class="footer">
+    <center>
+        <p>&copy; 2016 <a href="https://github.com/egin10">egin10</a>.</p>
+    </center>
+</footer>

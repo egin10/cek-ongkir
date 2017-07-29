@@ -8,7 +8,7 @@ const express = require("express"),
 
 //INDEX PAGE
 router.get("/", (req, res) => {
-  res.send("kiwkiwkiw");
+  res.render('index');
 });
 
 //GET PROVINCE
@@ -85,7 +85,8 @@ router.post('/cost', (req, res) => {
 
   axios.post(cfg.urlPostCost, dataParse, options).then((response) => {
     // console.log(response.data);
-    res.json(response.data);
+    let data = response.data.rajaongkir.results;
+    res.json(data);
   });
 });
 
