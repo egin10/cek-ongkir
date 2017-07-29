@@ -31,10 +31,13 @@ $(() => {
       courier: kurir
     }).done(results => {
       if(results.length > 0){
+        $("p").remove();
         results.map( (data, key) => {
-            console.log(`${data.service} ${data.description}`);
-            console.log(`${data.cost[0].etd}`);
-            console.log(`${data.cost[0].value}`);
+            $("#result").append(`<p id='r'>${data.service} ${data.description} ${data.cost[0].etd} ${data.cost[0].value}</p>`);
+
+            // console.log(`${data.service} ${data.description}`);
+            // console.log(`${data.cost[0].etd}`);
+            // console.log(`${data.cost[0].value}`);
         });
       }else{
         alert('Data Kosong');
